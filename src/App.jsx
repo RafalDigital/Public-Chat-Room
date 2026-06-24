@@ -7,6 +7,8 @@ import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 
 
 import {
   RiGoogleFill,
+  RiLogoutBoxLine,
+  RiSendInsFill
 } from '@remixicon/react'
 
 export default function App() {
@@ -77,14 +79,14 @@ export default function App() {
 function LoginArea({handleLogin}) {
   return (
     <>
-    <div className='absolute w-full h-full scale-125 bg-linear-to-tr from-zinc-950 via-zinc-400 to-zinc-950 
+      <div className='absolute w-full h-full scale-125 bg-linear-to-tr from-zinc-950 via-zinc-400 to-zinc-950 
             from-[40%] via-[50%] to-[60%]
             bg-[length:300%_300%] animate-wave z-0 opacity-0'></div>
-      <div className="w-full md:min-h-dvh min-h-[100vh] mx-auto z-20 backdrop-blur-3xl bg-[repeating-linear-gradient(45deg,transparent,transparent_30px,var(--color-zinc-900)_30px,var(--color-zinc-900)_31px)]">
+      <div className="w-full md:min-h-dvh min-h-[100vh] mx-auto z-20 backdrop-blur-3xl bg-[repeating-linear-gradient(45deg,transparent,transparent_30px,var(--color-zinc-900)_30px,var(--color-zinc-900)_31px)] overflow-hidden">
         <div className='w-fit p-6 h-fit bg-zinc-800 fixed top-1/2 left-1/2 -translate-1/2 flex flex-col justify-center items-center rounded-xl border border-x-zinc-300/15 border-y-zinc-400/15'>
         <h1 className='text-2xl text-white font-medium mb-4'>Sign In</h1>
-          <button onClick={handleLogin} className="bg-zinc-800 hover:bg-zinc-700 text-white cursor-pointer py-2 px-4 rounded-full flex gap-2 border border-x-zinc-300/15 border-y-zinc-400/15 hover:border-zinc-300/40 transition-all group">
-            <RiGoogleFill className='group-hover:scale-110 transition-all'/>
+          <button onClick={handleLogin} className="bg-zinc-800 justify-center items-center w-52 md:w-full h-fit hover:bg-zinc-700 text-white cursor-pointer py-2 px-4 rounded-full flex gap-2 border border-x-zinc-300/15 border-y-zinc-400/15 hover:border-zinc-300/40 transition-all group active:border-zinc-300/40 ">
+            <RiGoogleFill className='group-hover:scale-110 group-active:scale-110 transition-all'/>
             Sign in with Google
           </button>
         </div>
@@ -104,12 +106,12 @@ function MessageArea({signOut, messages, handleSubmit, input, setInput, user}) {
       <div className="lg:w-full bg-zinc-900 w-[90%] lg:max-w-7xl h-[90dvh] mx-auto rounded-2xl border border-x-zinc-300/15 border-y-zinc-400/15 overflow-hidden flex flex-col">
         {/* Header */}
         <div className='w-full h-fit p-4 border-b border-b-zinc-700 bg-zinc-800/40 flex items-center justify-between md:justify-center'>
-          <h1 className='text-white text-xl font-medium text-center font-mono'>Public Chat Room</h1>
+          <h1 className='text-white md:text-xl font-medium text-center font-mono text-md'>Public Chat Room</h1>
 
           {/* Mobile */}
           <div className='justify-self-end flex gap-4 items-center md:hidden'>
-              <button onClick={() => signOut(auth)} className='w-fit h-fit bg-red-500 text-white py-2 px-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-red-600 transition-all'>Logout</button>
-              <div className='w-10 h-10 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 overflow-hidden'>
+              <button onClick={() => signOut(auth)} className='w-fit h-fit bg-red-500 text-white py-2 px-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-red-600 transition-all text-sm'><RiLogoutBoxLine size={14}/></button>
+              <div className='w-8 h-8 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 overflow-hidden'>
                 <img src={user.photoURL} alt="" />
               </div>
           </div>
@@ -129,12 +131,12 @@ function MessageArea({signOut, messages, handleSubmit, input, setInput, user}) {
           {/* Form */}
           <form className='w-full gap-2 flex' onSubmit={handleSubmit}>
             <input value={input} onChange={((e) => setInput(e.target.value))} type="text" placeholder='Ketik Pesan' className='py-2 px-4 text-white rounded-full w-full md:w-1/4 border border-x-zinc-300/15 border-y-zinc-400/15 hover:border-zinc-300/40 transition-all focus:border-zinc-300 outline-0'/>
-            <button type='submit' className='w-fit h-fit bg-blue-600 text-white py-2 px-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-blue-700 transition-all'>Send</button>
+            <button type='submit' className='w-fit h-fit bg-blue-600 text-white md:py-2 px-4 py-3 active:bg-blue-700 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-blue-700 transition-all'><RiSendInsFill size={18} className='md:hidden'/> <span className='hidden md:block'>Send</span> </button>
           </form>
 
           {/* Info Desktop */}
           <div className='justify-self-end hidden gap-4 items-center md:flex'>
-              <button onClick={() => signOut(auth)} className='w-fit h-fit bg-red-500 text-white py-2 px-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-red-600 transition-all'>Logout</button>
+              <button onClick={() => signOut(auth)} className='w-fit h-fit bg-red-500 text-white py-2 px-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 hover:bg-red-600 transition-all flex gap-2'><RiLogoutBoxLine/>Logout</button>
               <div className='w-10 h-10 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 overflow-hidden'>
                 <img src={user.photoURL} alt="" />
               </div>
