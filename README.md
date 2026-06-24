@@ -1,4 +1,4 @@
-# [Project Name]
+# Public Chat Room
 
 Stack : REACT JS, TAILWIND CSS, FIREBASE
 
