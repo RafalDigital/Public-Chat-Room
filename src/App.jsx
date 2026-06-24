@@ -146,6 +146,10 @@ function MessageArea({signOut, messages, handleSubmit, input, setInput, user}) {
 }
 
 function Message({text, displayName, msg, user}) {
+
+  const DEVELOPER_UID = '8NnFTylZykY1iSBMQfzKEFcu2HB3';
+  const isDeveloper = msg.uid === DEVELOPER_UID;
+
   return (
     <>
       <div className={`flex flex-col gap-1 ${msg.uid === user.uid ? 'items-end' : 'items-start'}`}>
@@ -153,9 +157,16 @@ function Message({text, displayName, msg, user}) {
           <div className='w-4 h-4 rounded-full cursor-pointer border border-x-zinc-300/15 border-y-zinc-400/15 overflow-hidden'>
             <img src={msg.photoURL} alt="" />
           </div>
-          <span className='text-white font-mono text-xs'>{displayName}</span>
+          <span className={`font-mono text-xs ${isDeveloper ? 'text-amber-400' : 'text-white'}`}>
+            {msg.uid === user.uid ? 'You' : displayName}
+          </span>
+          {isDeveloper && (
+            <span className='text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/30 px-1.5 py-0.5 rounded-sm font-mono font-bold uppercase tracking-wider animate-pulse'>
+              [Developer]
+            </span>
+          )}
         </div>
-        <div className={`w-fit h-fit py-2 px-4 text-white rounded-bl-full ${msg.uid === user.uid ? 'rounded-tl-full bg-blue-500' : 'rounded-tr-full '} rounded-br-full border border-x-zinc-300/15 border-y-zinc-400/15`}>{text}</div>
+        <div className={`w-fit h-fit py-2 px-4 text-white rounded-bl-full ${msg.uid === user.uid ? 'rounded-tl-full bg-blue-500' : 'rounded-tr-full '} ${isDeveloper ? 'bg-amber-400/40 border border-amber-400/80 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.1)]' : ''} rounded-br-full border border-x-zinc-300/15 border-y-zinc-400/15`}>{text}</div>
       </div>
     </>
   )
